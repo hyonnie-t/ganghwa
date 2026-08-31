@@ -8,27 +8,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#12141a;
-    --bg2:#181c24;
-    --ink:#e9e4d6;
-    --sub:#a39d8f;
-    --line:#2c313b;
-    --card:#1b1f28;
-    --source-bg:#201c18;
-    --source-line:#3a3128;
-    --seal:#9a4438;
-    --seal-soft:#3a2420;
-    --accent:#4a6b64;
-    --accent-dark:#33504a;
-    --accent-pale:#22322e;
-    --paper-text:#f2ede0;
+    --bg:#f5efe4;
+    --bg2:#e9ddc4;
+    --text:#2b2620;
+    --sub:#6b6153;
+    --line:#d9cdb7;
+    --card:#fffbf2;
+    --source-bg:#efe3cc;
+    --source-line:#c9b795;
+    --accent-red:#8b3a2f;
+    --accent-red-soft:#f1ded8;
+    --accent-teal:#4a6b6e;
+    --accent-teal-dark:#375154;
+    --accent-teal-pale:#dde9e7;
+    --paper-text:#241f1a;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
     font-family:"Noto Sans KR","Pretendard","Malgun Gothic",sans-serif;
     background:var(--bg);
-    color:var(--ink);
+    color:var(--text);
     font-size:17px;
     line-height:1.65;
     -webkit-tap-highlight-color:transparent;
@@ -36,13 +36,13 @@
   .serif{font-family:"Noto Serif KR",serif;}
 
   .header{
-    background:linear-gradient(160deg, #0d1015 0%, var(--bg2) 100%);
-    border-bottom:1px solid var(--line);
-    color:#fff; padding:26px 20px 22px; text-align:center;
+    background:linear-gradient(160deg, var(--bg2) 0%, var(--bg) 100%);
+    border-bottom:3px solid var(--accent-red);
+    color:var(--text); padding:26px 20px 22px; text-align:center;
   }
-  .header .eyebrow{font-size:13px; letter-spacing:.5px; opacity:.7; font-weight:700;}
-  .header h1{margin:8px 0 6px; font-size:21px; font-weight:900; font-family:"Noto Serif KR",serif; line-height:1.4;}
-  .header p{margin:0; font-size:13.5px; opacity:.75;}
+  .header .eyebrow{font-size:13px; letter-spacing:.5px; font-weight:800; color:var(--accent-teal-dark);}
+  .header h1{margin:8px 0 6px; font-size:21px; font-weight:900; font-family:"Noto Serif KR",serif; line-height:1.4; color:var(--paper-text);}
+  .header p{margin:0; font-size:13.5px; color:var(--sub);}
 
   .wrap{max-width:640px; margin:0 auto; padding:18px 16px 90px;}
   .screen{display:none;}
@@ -51,68 +51,96 @@
 
   .card{
     background:var(--card); border:1px solid var(--line); border-radius:14px;
-    padding:22px 20px; margin-bottom:16px; box-shadow:0 3px 16px rgba(0,0,0,0.25);
+    padding:22px 20px; margin-bottom:16px; box-shadow:0 3px 14px rgba(43,38,32,0.08);
   }
   .badge-chip{
-    display:inline-block; background:var(--accent-pale); color:#bcd4ce;
+    display:inline-block; background:var(--accent-teal-pale); color:var(--accent-teal-dark);
     font-size:13px; font-weight:800; padding:5px 12px; border-radius:100px; margin-bottom:12px;
     letter-spacing:.2px;
   }
   h2{font-size:19px; margin:0 0 12px; font-weight:900; font-family:"Noto Serif KR",serif; line-height:1.45; color:var(--paper-text);}
-  h3{font-size:15px; margin:0 0 8px; font-weight:800; color:#c9b79f;}
+  h3{font-size:15px; margin:0 0 8px; font-weight:800; color:var(--accent-teal-dark);}
   p{margin:0 0 10px;}
   .sub{color:var(--sub); font-size:14.5px;}
 
   /* ── 사료 카드 ── */
   .source-card{
     background:var(--source-bg); border:1px solid var(--source-line); border-radius:6px;
-    padding:20px 20px 16px; margin-bottom:16px; position:relative;
+    padding:20px 20px 16px; margin-bottom:16px; position:relative; border-left:4px solid var(--accent-teal);
   }
+  .source-card.red{border-left-color:var(--accent-red);}
   .source-card::before{
     content:"史"; position:absolute; top:8px; right:14px; font-size:32px;
-    color:var(--seal); opacity:.22; font-family:"Noto Serif KR",serif; font-weight:900;
+    color:var(--paper-text); opacity:.08; font-family:"Noto Serif KR",serif; font-weight:900;
   }
   .source-card .src-tag{
-    display:inline-block; font-size:12px; font-weight:800; color:#d0a08f;
-    background:var(--seal-soft); padding:3px 10px; border-radius:100px; margin-bottom:10px;
+    display:inline-block; font-size:12px; font-weight:800; color:var(--accent-teal-dark);
+    background:#fff; border:1px solid var(--accent-teal); padding:3px 10px; border-radius:100px; margin-bottom:10px;
   }
+  .source-card.red .src-tag{color:var(--accent-red); border-color:var(--accent-red);}
   .source-card h3{font-family:"Noto Serif KR",serif; font-size:16.5px; color:var(--paper-text); margin-bottom:8px;}
   .source-card .quote{
-    font-family:"Noto Serif KR",serif; font-size:15.5px; line-height:1.85; color:#efe9da;
+    font-family:"Noto Serif KR",serif; font-size:15.5px; line-height:1.85; color:var(--text);
   }
   .source-card .cite{
     margin-top:10px; padding-top:10px; border-top:1px dashed var(--source-line);
     font-size:12.5px; color:var(--sub);
   }
-  .source-card .cite a{color:#9fb8b2; text-decoration:none; border-bottom:1px dotted #5a6d68;}
+  .source-card .cite a{color:var(--accent-teal-dark); text-decoration:none; border-bottom:1px dotted var(--accent-teal);}
 
   .set-label{
     font-size:12.5px; font-weight:800; color:var(--sub); letter-spacing:.4px;
     margin:0 0 10px; text-transform:none;
   }
   .transition-box{
-    background:var(--accent-pale); border-radius:12px; padding:14px 16px; margin:14px 0 18px;
-    font-size:14.5px; color:#c9ddd7; line-height:1.65;
+    background:var(--accent-teal-pale); border-radius:12px; padding:14px 16px; margin:14px 0 18px;
+    font-size:14.5px; color:var(--accent-teal-dark); line-height:1.65;
   }
+
+  /* ── 즉답 질문(체크질문형) ── */
+  .quiz-box{margin-top:6px;}
+  .quiz-q{font-weight:800; font-size:15.5px; margin:0 0 12px; color:var(--paper-text);}
+  .choice-row{display:flex; flex-wrap:wrap; gap:10px;}
+  .choice-btn{
+    flex:1 1 45%; min-width:130px; background:#fff; border:2px solid var(--line); border-radius:12px;
+    padding:16px 14px; font-size:15px; font-weight:800; text-align:center; cursor:pointer;
+    color:var(--text); transition:all .15s ease; min-height:50px;
+  }
+  .choice-btn:active{transform:scale(0.97);}
+  .choice-btn.red.selected{background:var(--accent-red); border-color:var(--accent-red); color:#fff;}
+  .choice-btn.teal.selected{background:var(--accent-teal); border-color:var(--accent-teal); color:#fff;}
+
+  /* ── 자유 반응(사료③) ── */
+  .response-count{font-size:12.5px; color:var(--sub); text-align:right; margin-top:4px;}
+  .response-count.ok{color:var(--accent-teal-dark); font-weight:700;}
+  .response-count.over{color:#a8722e;}
+
+  /* ── 판단 글쓰기: 응답 요약 카드 ── */
+  .summary-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin-bottom:16px;}
+  .summary-row{display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .summary-row:last-child{border-bottom:none;}
+  .summary-tag{flex:0 0 auto; font-size:12px; font-weight:800; padding:3px 9px; border-radius:100px; color:#fff; margin-top:1px;}
+  .summary-tag.red{background:var(--accent-red);}
+  .summary-tag.teal{background:var(--accent-teal);}
 
   label{display:block; font-weight:700; font-size:14.5px; margin:14px 0 6px; color:var(--paper-text);}
   input[type=text]{
     width:100%; padding:14px 16px; font-size:17px;
-    border:2px solid var(--line); border-radius:12px; background:#0f1218; color:var(--ink); min-height:48px;
+    border:2px solid var(--line); border-radius:12px; background:#fff; color:var(--text); min-height:48px;
   }
-  input:focus{outline:none; border-color:var(--accent);}
-  input::placeholder{color:#655f54;}
+  input:focus{outline:none; border-color:var(--accent-teal);}
+  input::placeholder{color:#9c9282;}
   textarea{
-    width:100%; min-height:150px; padding:14px 16px; font-size:16px;
-    border:2px solid var(--line); border-radius:12px; background:#0f1218; color:var(--ink);
+    width:100%; min-height:130px; padding:14px 16px; font-size:16px;
+    border:2px solid var(--line); border-radius:12px; background:#fff; color:var(--text);
     resize:vertical; font-family:inherit; line-height:1.6;
   }
-  textarea:focus{outline:none; border-color:var(--accent);}
-  textarea::placeholder{color:#655f54;}
+  textarea:focus{outline:none; border-color:var(--accent-teal);}
+  textarea::placeholder{color:#9c9282;}
 
   .charcount{font-size:12.5px; color:var(--sub); text-align:right; margin-top:4px;}
-  .charcount.ok{color:#8fbdb1;}
-  .charcount.over{color:#c9a06b;}
+  .charcount.ok{color:var(--accent-teal-dark); font-weight:700;}
+  .charcount.over{color:#a8722e;}
 
   .btn{
     display:block; width:100%; padding:15px 20px; font-size:16.5px; font-weight:800;
@@ -120,9 +148,9 @@
     transition:transform .1s ease, opacity .15s ease;
   }
   .btn:active{transform:scale(0.98);}
-  .btn-primary{background:var(--accent); color:#fff; box-shadow:0 4px 14px rgba(74,107,100,0.35);}
-  .btn-primary:disabled{background:#333c3f; color:#7d8a89; cursor:not-allowed; box-shadow:none;}
-  .btn-outline{background:transparent; color:#bcd4ce; border:2px solid var(--accent);}
+  .btn-primary{background:var(--accent-teal); color:#fff; box-shadow:0 4px 14px rgba(74,107,110,0.28);}
+  .btn-primary:disabled{background:#cfc6b4; color:#8b8371; cursor:not-allowed; box-shadow:none;}
+  .btn-outline{background:transparent; color:var(--accent-teal-dark); border:2px solid var(--accent-teal);}
 
   .hint-toggle{
     display:inline-flex; align-items:center; gap:6px;
@@ -131,19 +159,20 @@
     cursor:pointer; margin:10px 0 0;
   }
   .hint-box{
-    display:none; background:#20242c; border-radius:12px; padding:12px 14px;
-    font-size:14px; color:#b7b2a4; margin-top:8px; line-height:1.6;
+    display:none; background:var(--source-bg); border:1px solid var(--source-line); border-radius:12px; padding:12px 14px;
+    font-size:14px; color:var(--text); margin-top:8px; line-height:1.6;
   }
   .hint-box.open{display:block;}
+  .hint-box .quote{font-family:"Noto Serif KR",serif; font-size:14.5px; line-height:1.8;}
 
   .preview-banner{
-    background:var(--seal); color:#fff; text-align:center; font-size:13px; font-weight:800;
+    background:var(--accent-red); color:#fff; text-align:center; font-size:13px; font-weight:800;
     padding:8px; position:sticky; top:0; z-index:20;
   }
 
   .step-dots{display:flex; justify-content:center; gap:6px; margin-top:14px;}
-  .step-dot{width:6px; height:6px; border-radius:50%; background:#3a4048;}
-  .step-dot.on{background:var(--accent);}
+  .step-dot{width:6px; height:6px; border-radius:50%; background:var(--line);}
+  .step-dot.on{background:var(--accent-teal);}
 
   @media (min-width:760px){ body{font-size:17.5px;} }
 </style>
@@ -166,8 +195,9 @@
     <div class="card">
       <span class="badge-chip">시작하기</span>
       <h2>1차시에서, 우리 반 대부분은 강화도 천도를 '항전 의지'라고 판단했었지.</h2>
-      <p class="sub">오늘은 그 판단을 다시 검토해볼 새로운 사료 두 갈래를 만나볼 거예요.
-      게임 요소는 없고, 사료를 읽고 다시 판단해서 짧은 글을 쓰는 활동이에요.</p>
+      <p class="sub">1232년, 최우는 반대하는 신하를 처단하면서까지 강화도 천도를 강행했어.
+      오늘은 그 천도 과정에서 남은 다른 기록들을 하나씩 만나보고, 그때 내린 판단을 다시 검토해볼 거예요.
+      게임 요소는 없고, 사료를 하나씩 읽으며 짧게 답하고, 마지막에 정리하는 활동이에요.</p>
 
       <label>학번</label>
       <input type="text" id="studentId" inputmode="numeric" maxlength="5" placeholder="예: 30501">
@@ -178,21 +208,11 @@
     </div>
   </div>
 
-  <!-- 화면: 사료 세트 1 (권력욕 축) -->
-  <div class="screen" id="screen-set1">
-    <p class="set-label">사료 ① · 천도가 강행된 과정</p>
+  <!-- 화면: 사료① (기록2 — 천도 첫날 옮겨진 것) -->
+  <div class="screen" id="screen-source1">
+    <p class="set-label">사료 ① · 천도가 강행된 첫날</p>
 
-    <div class="source-card">
-      <span class="src-tag">기록 1</span>
-      <h3>반대를 처단하고 강행한 천도</h3>
-      <p class="quote">몽골이 다시 쳐들어올 조짐을 보이자, 최우는 고위 관리들의 회의(재추 회의)를
-      열어 강화도 천도를 논의했어. 유승단은 몽골과 화친하자고 했고, 김세충은 개경을 끝까지
-      지키자고 반대했어. 최우는 반대한 김세충을 처단한 뒤, 그 위압적인 분위기 속에서
-      천도를 강행했어.</p>
-      <div class="cite">출처: 국사편찬위원회 우리역사넷 「사료로 본 한국사 – 강화 천도」</div>
-    </div>
-
-    <div class="source-card">
+    <div class="source-card red">
       <span class="src-tag">기록 2</span>
       <h3>가장 먼저 옮겨진 것</h3>
       <p class="quote">천도가 결정된 그날, 최우는 관리들의 녹봉(월급)으로 쓸 쌀을 실어 나르던
@@ -200,22 +220,19 @@
       <div class="cite">출처: 우리역사넷 인물 「최우」 / 한국민족문화대백과사전 「최우」 — 두 자료 모두 같은 사실을 전함</div>
     </div>
 
-    <div class="source-card">
-      <span class="src-tag">기록 3 · 참고</span>
-      <h3>격구장을 위해 사라진 집들</h3>
-      <p class="quote">1229년에는 격구(말을 타고 공을 치는 놀이) 경기장을 만들기 위해,
-      백성의 집 100여 채를 강제로 빼앗아 철거하기도 했어.</p>
-      <div class="cite">출처: 우리역사넷 인물 「최우」</div>
+    <div class="card quiz-box">
+      <!-- 워딩 임시 초안 — 배포 전 효니 검수 필요 -->
+      <p class="quiz-q">이 장면에서 가장 먼저 챙겨진 건 —</p>
+      <div class="choice-row">
+        <button class="choice-btn red" id="c1-a" data-label="관청의 재정">관청의 재정</button>
+        <button class="choice-btn red" id="c1-b" data-label="최우 개인의 재산">최우 개인의 재산</button>
+      </div>
     </div>
-
-    <div class="transition-box">이제 같은 시기, 백성들은 어떻게 지냈는지 보여주는 사료를 만나볼 거예요.</div>
-
-    <button class="btn btn-primary" id="toSet2Btn">다음 사료 보기</button>
   </div>
 
-  <!-- 화면: 사료 세트 2 (대조축 — 백성의 피해) -->
-  <div class="screen" id="screen-set2">
-    <p class="set-label">사료 ② · 같은 시기, 백성들의 삶</p>
+  <!-- 화면: 사료② (기록4 — 포로 20만) -->
+  <div class="screen" id="screen-source2">
+    <p class="set-label">사료 ② · 같은 시기, 몽골군에게 끌려간 사람들</p>
 
     <div class="source-card">
       <span class="src-tag">기록 4</span>
@@ -225,6 +242,21 @@
       <div class="cite">출처: 『고려사』 권24, 고종 41년 12월 갑오 기사</div>
     </div>
 
+    <div class="card quiz-box">
+      <!-- 워딩 임시 초안 — 배포 전 효니 검수 필요 (특히 20만 6,800명의 시대적 맥락에서
+           '일부/대규모' 선택지가 과장·축소로 읽히지 않는지 확인) -->
+      <p class="quiz-q">이 숫자가 보여주는 건 —</p>
+      <div class="choice-row">
+        <button class="choice-btn teal" id="c2-a" data-label="일부의 피해">일부의 피해</button>
+        <button class="choice-btn teal" id="c2-b" data-label="대규모의 피해">대규모의 피해</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 화면: 사료③ (기록5 — 산성으로 피신, 자유 반응) -->
+  <div class="screen" id="screen-source3">
+    <p class="set-label">사료 ③ · 산성으로 피신한 사람들</p>
+
     <div class="source-card">
       <span class="src-tag">기록 5</span>
       <h3>산성으로 피신한 사람들</h3>
@@ -233,18 +265,34 @@
       <div class="cite">출처: 『고려사절요』 권17, 고종 42년 3월</div>
     </div>
 
-    <div class="transition-box">두 갈래 사료를 다 봤어요. 이제 이걸 바탕으로 다시 판단해봐요.</div>
-
-    <button class="btn btn-primary" id="toJudgeBtn">판단하러 가기</button>
+    <div class="card">
+      <p class="quiz-q">이 장면에서 가장 마음에 걸리는 부분을 한 문장으로 남겨봐</p>
+      <input type="text" id="response3Input" maxlength="40" placeholder="예: 아이를 두고 떠나야 했다는 게...">
+      <div class="response-count" id="response3Count">0자 (10~20자 권장)</div>
+      <button class="btn btn-primary" id="toJudgeBtn" disabled>판단하러 가기</button>
+    </div>
   </div>
 
   <!-- 화면: 판단 쓰기 -->
   <div class="screen" id="screen-judge">
+    <div class="summary-card" id="summaryCard">
+      <div class="summary-row"><span class="summary-tag red">사료①</span><span id="summaryChoice1"></span></div>
+      <div class="summary-row"><span class="summary-tag teal">사료②</span><span id="summaryChoice2"></span></div>
+      <div class="summary-row"><span class="summary-tag teal">사료③</span><span id="summaryResponse3"></span></div>
+    </div>
+
+    <button class="hint-toggle" id="reviewToggle">📖 사료 다시 보기</button>
+    <div class="hint-box" id="reviewBox">
+      <span class="src-tag">기록 5</span>
+      <p class="quote">전쟁을 피해 공주(公州) 산성으로 들어간 백성 중에는 굶어 죽는 사람이
+      많았고, 어떤 이는 함께 데려갈 수 없었던 아이를 나무에 묶어 놓은 채 떠나야 했어.</p>
+    </div>
+
     <div class="card">
       <span class="badge-chip">다시 판단하기</span>
       <h2>이 사료들을 보고, 최씨정권의 강화도 천도를 다시 어떻게 평가할래?</h2>
       <p class="sub">1차시 때 쓴 판단과 같아도 괜찮고, 달라져도 괜찮아요. 중요한 건
-      오늘 본 사료를 근거로 삼는 것. 100~200자 정도로 써보자.</p>
+      오늘 본 사료를 근거로 삼는 것. 60~100자 정도로 써보자.</p>
 
       <textarea id="judgeInput" placeholder="예: 최씨정권이 강화도로 옮긴 건 항전 준비라는 설명도 있지만, 오늘 본 사료를 보면..."></textarea>
       <div class="charcount" id="charCount">0자</div>
@@ -283,7 +331,7 @@ const CONFIG = {
   // 이 웹앱 안에는 교사 토큰을 넣지 않음(학생용 페이지 소스에 노출되는 걸 막기 위함).
 };
 
-/* 역사 정확성 메모 (2026-08-31 핸드오프 문서 기준):
+/* 역사 정확성 메모 (2026-08-31 핸드오프 문서 기준 · 활동1 재구성):
  * - 사료 1~3(권력욕 축)·4~5(백성 피해 축) 모두 검색 스니펫 기반 대조 완료.
  *   자동 크롤러가 원 사이트(contents.history.go.kr) 접근이 막혀 있어 검색 결과로 대조한
  *   것이므로, 실제 수업 배포 전 브라우저로 원문 링크를 한 번 더 눈으로 확인하는 걸 권장.
@@ -295,12 +343,17 @@ const CONFIG = {
  *   있는 인물"로 단정하는 표현은 피함 — 이 화면에서도 최우 개인에 대한 단정적 평가 문구
  *   대신 사실(행위) 서술만 제시함.
  * - 정오 판정 없음. 학생 판단은 자유 서술로만 기록.
+ * - 사료①·② 즉답 질문 워딩은 임시 초안. 특히 사료②의 "일부/대규모" 선택지가 20만
+ *   6,800명이라는 숫자의 시대적 맥락에서 과장·축소로 읽히지 않는지 배포 전 효니 검수 필요.
+ * - 기록1(반대 처단하고 강행)은 별도 사료 카드에서 삭제하고, 도입 화면 안내문으로 흡수함.
+ * - 기록3(격구장)은 삭제(원래도 참고용 부차 사료였음).
  */
 
 let studentId = "", studentName = "";
 let PREVIEW = false;
+let choice1 = "", choice2 = "", response3 = "";
 
-const SCREENS = ["screen-start","screen-set1","screen-set2","screen-judge","screen-result"];
+const SCREENS = ["screen-start","screen-source1","screen-source2","screen-source3","screen-judge","screen-result"];
 
 function showScreen(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
@@ -326,13 +379,55 @@ function checkStart(){
 startBtn.addEventListener("click", () => {
   studentId = studentIdEl.value.trim();
   studentName = studentNameEl.value.trim();
-  showScreen("screen-set1");
+  showScreen("screen-source1");
 });
 
-document.getElementById("toSet2Btn").addEventListener("click", () => showScreen("screen-set2"));
-document.getElementById("toJudgeBtn").addEventListener("click", () => showScreen("screen-judge"));
+/* ── 사료① 즉답 질문 (2지선다, 탭 하나로 응답 후 자동 진행) ── */
+const c1a = document.getElementById("c1-a");
+const c1b = document.getElementById("c1-b");
+function pickChoice1(btn){
+  choice1 = btn.dataset.label;
+  [c1a, c1b].forEach(b => b.classList.toggle("selected", b === btn));
+  setTimeout(() => showScreen("screen-source2"), 320);
+}
+c1a.addEventListener("click", () => pickChoice1(c1a));
+c1b.addEventListener("click", () => pickChoice1(c1b));
 
-/* ── 판단 입력 ── */
+/* ── 사료② 즉답 질문 ── */
+const c2a = document.getElementById("c2-a");
+const c2b = document.getElementById("c2-b");
+function pickChoice2(btn){
+  choice2 = btn.dataset.label;
+  [c2a, c2b].forEach(b => b.classList.toggle("selected", b === btn));
+  setTimeout(() => showScreen("screen-source3"), 320);
+}
+c2a.addEventListener("click", () => pickChoice2(c2a));
+c2b.addEventListener("click", () => pickChoice2(c2b));
+
+/* ── 사료③ 자유 반응 (정답 없음, 10~20자 권장) ── */
+const response3Input = document.getElementById("response3Input");
+const response3Count = document.getElementById("response3Count");
+response3Input.addEventListener("input", () => {
+  const len = response3Input.value.trim().length;
+  response3Count.textContent = `${len}자 (10~20자 권장)`;
+  response3Count.className = "response-count" + (len >= 10 && len <= 20 ? " ok" : (len > 20 ? " over" : ""));
+  document.getElementById("toJudgeBtn").disabled = len < 5;
+});
+
+document.getElementById("toJudgeBtn").addEventListener("click", () => {
+  response3 = response3Input.value.trim();
+  document.getElementById("summaryChoice1").textContent = choice1;
+  document.getElementById("summaryChoice2").textContent = choice2;
+  document.getElementById("summaryResponse3").textContent = `"${response3}"`;
+  showScreen("screen-judge");
+});
+
+/* ── 판단 글쓰기 화면: 사료 다시 보기 토글 ── */
+document.getElementById("reviewToggle").addEventListener("click", () => {
+  document.getElementById("reviewBox").classList.toggle("open");
+});
+
+/* ── 판단 입력 (60~100자) ── */
 const judgeInput = document.getElementById("judgeInput");
 const submitBtn = document.getElementById("submitBtn");
 const charCount = document.getElementById("charCount");
@@ -340,8 +435,8 @@ const charCount = document.getElementById("charCount");
 judgeInput.addEventListener("input", () => {
   const len = judgeInput.value.trim().length;
   charCount.textContent = `${len}자`;
-  charCount.className = "charcount" + (len >= 100 && len <= 200 ? " ok" : (len > 200 ? " over" : ""));
-  submitBtn.disabled = len < 40;
+  charCount.className = "charcount" + (len >= 60 && len <= 100 ? " ok" : (len > 100 ? " over" : ""));
+  submitBtn.disabled = len < 20;
 });
 
 document.getElementById("hintToggle").addEventListener("click", () => {
@@ -354,13 +449,14 @@ submitBtn.addEventListener("click", async () => {
   submitBtn.textContent = "제출 중...";
 
   const reflection = judgeInput.value.trim();
+  const choiceSummary = `${choice1} · ${choice2} · "${response3}"`;
   const payload = {
     gameName: CONFIG.GAME_NAME,
     studentId: studentId,
     studentName: studentName,
     reflection: reflection,
-    choicesJson: "",
-    choiceSummary: "",
+    choicesJson: JSON.stringify({ choice1, choice2, response3 }),
+    choiceSummary: choiceSummary,
     diffSummary: ""
   };
 
