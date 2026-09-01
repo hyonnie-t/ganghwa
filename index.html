@@ -115,13 +115,37 @@
   .response-count.ok{color:var(--accent-teal-dark); font-weight:700;}
   .response-count.over{color:#a8722e;}
 
-  /* ── 판단 글쓰기: 응답 요약 카드 ── */
+  /* ── 결과 화면: 응답 요약 카드 ── */
   .summary-card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin-bottom:16px;}
   .summary-row{display:flex; gap:10px; align-items:flex-start; padding:9px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
   .summary-row:last-child{border-bottom:none;}
   .summary-tag{flex:0 0 auto; font-size:12px; font-weight:800; padding:3px 9px; border-radius:100px; color:#fff; margin-top:1px;}
   .summary-tag.red{background:var(--accent-red);}
   .summary-tag.teal{background:var(--accent-teal);}
+
+  /* ── 사료 다시 보기: 아코디언 ── */
+  .review-accordion{margin:4px 0 18px;}
+  .review-item{
+    border:1px solid var(--source-line); border-radius:10px; margin-bottom:8px;
+    overflow:hidden; background:var(--source-bg);
+  }
+  .review-item-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:13px 14px; cursor:pointer; font-weight:800; font-size:14.5px; color:var(--paper-text);
+    min-height:48px;
+  }
+  .review-item-head .tag{
+    flex:0 0 auto; font-size:11.5px; font-weight:800; padding:2px 8px; border-radius:100px; color:#fff;
+  }
+  .review-item-head .tag.red{background:var(--accent-red);}
+  .review-item-head .tag.teal{background:var(--accent-teal);}
+  .review-item-head .ttl{flex:1;}
+  .review-item-head .chev{flex:0 0 auto; color:var(--sub); font-size:13px; transition:transform .2s ease;}
+  .review-item.open .review-item-head .chev{transform:rotate(180deg);}
+  .review-item-body{display:none; padding:0 14px 14px;}
+  .review-item.open .review-item-body{display:block;}
+  .review-item-body .quote{font-family:"Noto Serif KR",serif; font-size:14.5px; line-height:1.8; color:var(--text);}
+  .review-item-body .cite{font-size:12px; color:var(--sub); margin-top:8px; padding-top:8px; border-top:1px dashed var(--source-line);}
 
   label{display:block; font-weight:700; font-size:14.5px; margin:14px 0 6px; color:var(--paper-text);}
   input[type=text]{
@@ -163,7 +187,6 @@
     font-size:14px; color:var(--text); margin-top:8px; line-height:1.6;
   }
   .hint-box.open{display:block;}
-  .hint-box .quote{font-family:"Noto Serif KR",serif; font-size:14.5px; line-height:1.8;}
 
   .preview-banner{
     background:var(--accent-red); color:#fff; text-align:center; font-size:13px; font-weight:800;
@@ -196,8 +219,8 @@
       <span class="badge-chip">시작하기</span>
       <h2>1차시에서, 우리 반 대부분은 강화도 천도를 '항전 의지'라고 판단했었지.</h2>
       <p class="sub">1232년, 최우는 반대하는 신하를 처단하면서까지 강화도 천도를 강행했어.
-      오늘은 그 천도 과정에서 남은 다른 기록들을 하나씩 만나보고, 그때 내린 판단을 다시 검토해볼 거예요.
-      게임 요소는 없고, 사료를 하나씩 읽으며 짧게 답하고, 마지막에 정리하는 활동이에요.</p>
+      오늘은 그 천도를 둘러싼 네 가지 기록을 하나씩 만나보고, 그때 내린 판단을 다시 검토해볼 거예요.
+      게임 요소는 없고, 사료를 하나씩 읽으며 짧게 답하는 활동이에요.</p>
 
       <label>학번</label>
       <input type="text" id="studentId" inputmode="numeric" maxlength="5" placeholder="예: 30501">
@@ -208,7 +231,7 @@
     </div>
   </div>
 
-  <!-- 화면: 사료① (기록2 — 천도 첫날 옮겨진 것) -->
+  <!-- 화면: 사료① (기록2 — 천도 첫날 옮겨진 것 · 버린 것) -->
   <div class="screen" id="screen-source1">
     <p class="set-label">사료 ① · 천도가 강행된 첫날</p>
 
@@ -221,8 +244,7 @@
     </div>
 
     <div class="card quiz-box">
-      <!-- 워딩 임시 초안 — 배포 전 효니 검수 필요 -->
-      <p class="quiz-q">이 장면에서 가장 먼저 챙겨진 건 —</p>
+      <p class="quiz-q">이날, 강화도로 가장 먼저 옮겨진 건 —</p>
       <div class="choice-row">
         <button class="choice-btn red" id="c1-a" data-label="관청의 재정">관청의 재정</button>
         <button class="choice-btn red" id="c1-b" data-label="최우 개인의 재산">최우 개인의 재산</button>
@@ -230,34 +252,32 @@
     </div>
   </div>
 
-  <!-- 화면: 사료② (기록4 — 포로 20만) -->
+  <!-- 화면: 사료② (신규 — 강화도 지형 이점 · 지킨 것) -->
   <div class="screen" id="screen-source2">
-    <p class="set-label">사료 ② · 같은 시기, 몽골군에게 끌려간 사람들</p>
+    <p class="set-label">사료 ② · 같은 곳, 다른 이유</p>
 
     <div class="source-card">
-      <span class="src-tag">기록 4</span>
-      <h3>포로가 된 20만 명</h3>
-      <p class="quote">1254년(고종 41년) 12월, 몽골군에게 포로로 끌려간 백성이
-      20만 6,800여 명에 이르렀고, 목숨을 잃은 사람은 셀 수조차 없었어.</p>
-      <div class="cite">출처: 『고려사』 권24, 고종 41년 12월 갑오 기사</div>
+      <span class="src-tag">기록 A</span>
+      <h3>버틸 수 있었던 이유</h3>
+      <p class="quote">강화도는 농사지을 땅이 넉넉해 식량 걱정이 적었고, 물살이 거세어
+      해전에 약한 몽골군이 쉽게 접근하지 못하는 곳이었어.</p>
+      <div class="cite">출처: 역사② 교과서 93쪽(3단원, 몽골의 간섭과 고려의 개혁) — 정확한 출판사·쪽수 표기는 효니 확인 필요</div>
     </div>
 
     <div class="card quiz-box">
-      <!-- 워딩 임시 초안 — 배포 전 효니 검수 필요 (특히 20만 6,800명의 시대적 맥락에서
-           '일부/대규모' 선택지가 과장·축소로 읽히지 않는지 확인) -->
-      <p class="quiz-q">이 숫자가 보여주는 건 —</p>
+      <p class="quiz-q">강화도를 고른 진짜 이유는 —</p>
       <div class="choice-row">
-        <button class="choice-btn teal" id="c2-a" data-label="일부의 피해">일부의 피해</button>
-        <button class="choice-btn teal" id="c2-b" data-label="대규모의 피해">대규모의 피해</button>
+        <button class="choice-btn teal" id="c2-a" data-label="지켜내기 좋은 지형이라서">지켜내기 좋은 지형이라서</button>
+        <button class="choice-btn teal" id="c2-b" data-label="그냥 가까운 섬이라서">그냥 가까운 섬이라서</button>
       </div>
     </div>
   </div>
 
-  <!-- 화면: 사료③ (기록5 — 산성으로 피신, 자유 반응) -->
+  <!-- 화면: 사료③ (기록5 — 산성으로 피신, 자유 반응 · 버린 것) -->
   <div class="screen" id="screen-source3">
     <p class="set-label">사료 ③ · 산성으로 피신한 사람들</p>
 
-    <div class="source-card">
+    <div class="source-card red">
       <span class="src-tag">기록 5</span>
       <h3>산성으로 피신한 사람들</h3>
       <p class="quote">전쟁을 피해 공주(公州) 산성으로 들어간 백성 중에는 굶어 죽는 사람이
@@ -269,53 +289,51 @@
       <p class="quiz-q">이 장면에서 가장 마음에 걸리는 부분을 한 문장으로 남겨봐</p>
       <input type="text" id="response3Input" maxlength="40" placeholder="예: 아이를 두고 떠나야 했다는 게...">
       <div class="response-count" id="response3Count">0자 (10~20자 권장)</div>
-      <button class="btn btn-primary" id="toJudgeBtn" disabled>판단하러 가기</button>
+      <button class="btn btn-primary" id="toSource4Btn" disabled>다음 사료 보기</button>
     </div>
   </div>
 
-  <!-- 화면: 판단 쓰기 -->
-  <div class="screen" id="screen-judge">
-    <div class="summary-card" id="summaryCard">
-      <div class="summary-row"><span class="summary-tag red">사료①</span><span id="summaryChoice1"></span></div>
-      <div class="summary-row"><span class="summary-tag teal">사료②</span><span id="summaryChoice2"></span></div>
-      <div class="summary-row"><span class="summary-tag teal">사료③</span><span id="summaryResponse3"></span></div>
+  <!-- 화면: 사료④ (신규 — 40년 항전과 강화 · 지킨 것) -->
+  <div class="screen" id="screen-source4">
+    <p class="set-label">사료 ④ · 그리고 40년 뒤</p>
+
+    <div class="source-card">
+      <span class="src-tag">기록 B</span>
+      <h3>40년을 버틴 결과</h3>
+      <p class="quote">이후 고려는 40여 년간 몽골에 맞서 싸웠고, 훗날 태자(원종)는 몽골과
+      협상해 고려의 독립과 풍속을 유지하는 조건으로 강화를 맺었어.</p>
+      <div class="cite">출처: 역사② 교과서 93~94쪽 — 정확한 출판사·쪽수 표기는 효니 확인 필요</div>
     </div>
 
-    <button class="hint-toggle" id="reviewToggle">📖 사료 다시 보기</button>
-    <div class="hint-box" id="reviewBox">
-      <span class="src-tag">기록 5</span>
-      <p class="quote">전쟁을 피해 공주(公州) 산성으로 들어간 백성 중에는 굶어 죽는 사람이
-      많았고, 어떤 이는 함께 데려갈 수 없었던 아이를 나무에 묶어 놓은 채 떠나야 했어.</p>
-    </div>
-
-    <div class="card">
-      <span class="badge-chip">다시 판단하기</span>
-      <h2>이 사료들을 보고, 최씨정권의 강화도 천도를 다시 어떻게 평가할래?</h2>
-      <p class="sub">1차시 때 쓴 판단과 같아도 괜찮고, 달라져도 괜찮아요. 중요한 건
-      오늘 본 사료를 근거로 삼는 것. 60~100자 정도로 써보자.</p>
-
-      <textarea id="judgeInput" placeholder="예: 최씨정권이 강화도로 옮긴 건 항전 준비라는 설명도 있지만, 오늘 본 사료를 보면..."></textarea>
-      <div class="charcount" id="charCount">0자</div>
-
-      <button class="hint-toggle" id="hintToggle">💡 막막하면 힌트 보기</button>
-      <div class="hint-box" id="hintBox">힌트: 최우가 '가장 먼저 옮긴 것'과, 백성들이 '피란지에서 겪은 일'을 나란히
-      놓고 비교해보자. '항전 준비'라는 설명과 방금 본 사료들이 어떻게 같이 성립할 수 있을지,
-      아니면 어느 한쪽에 더 무게가 실리는지 생각해봐.</div>
-
-      <button class="btn btn-primary" id="submitBtn" disabled>제출하기</button>
+    <div class="card quiz-box">
+      <p class="quiz-q">40년 뒤 몽골과 강화하며 지킨 건 —</p>
+      <div class="choice-row">
+        <button class="choice-btn teal" id="c4-a" data-label="고려의 독립과 풍속">고려의 독립과 풍속</button>
+        <button class="choice-btn teal" id="c4-b" data-label="강화도라는 땅 자체">강화도라는 땅 자체</button>
+      </div>
     </div>
   </div>
 
-  <!-- 화면: 결과 -->
+  <!-- 화면: 결과 / 다음 활동 안내 -->
   <div class="screen" id="screen-result">
     <div class="card">
       <span class="badge-chip">제출 완료</span>
       <h2 id="resultGreeting">수고했어요!</h2>
-      <p class="sub">이제 짝과 서로 쓴 판단을 비교해보자. 같은 사료를 보고도 서로 다르게
-      판단했을 수 있어요. 어느 쪽 근거가 더 설득력 있는지, 짝과 이야기해보자.</p>
-      <p class="sub" style="margin-top:14px;">오늘 쓴 판단은 다음 시간(원종의 협상 → 삼별초의 항쟁)
-      활동에서 이어서 다룰 거예요.</p>
+      <p class="sub">네 가지 기록을 통해 강화도 천도를 다시 살펴봤어요. 최종 판단은 다음 활동
+      (원종의 협상 → 삼별초의 항쟁)을 마친 뒤, 거기서 한 번에 정리해서 쓸 거예요.</p>
     </div>
+
+    <div class="summary-card" id="summaryCard">
+      <div class="summary-row"><span class="summary-tag red">사료①</span><span id="summaryChoice1"></span></div>
+      <div class="summary-row"><span class="summary-tag teal">사료②</span><span id="summaryChoice2"></span></div>
+      <div class="summary-row"><span class="summary-tag red">사료③</span><span id="summaryResponse3"></span></div>
+      <div class="summary-row"><span class="summary-tag teal">사료④</span><span id="summaryChoice4"></span></div>
+    </div>
+
+    <button class="hint-toggle" id="reviewToggle">📖 사료 다시 보기</button>
+    <div class="review-accordion" id="reviewAccordion" style="display:none;"></div>
+
+    <button class="btn btn-primary" id="nextActivityBtn">다음 활동으로 넘어가기 →</button>
   </div>
 
 </div>
@@ -326,34 +344,51 @@
  * ════════════════════════════════════════════════════════ */
 const CONFIG = {
   SHEET_WEBAPP_URL: "https://script.google.com/macros/s/AKfycbyXSjCfWY_HiZFqW_OBR-FQDoIfF1z_STqyKWUI31MacHeY3u7hbirFSFDvW-5yuUHaJQ/exec",
-  GAME_NAME: "몽골2차시_사료탐구"
+  GAME_NAME: "몽골2차시_사료탐구",
+  NEXT_ACTIVITY_URL: "https://hyonnie-t.github.io/Goryeo-Mongol/"
   // 교사용 제출 현황은 통합 포털 대시보드에서 백엔드(teacherGet_)를 직접 호출해서 보여줌 —
   // 이 웹앱 안에는 교사 토큰을 넣지 않음(학생용 페이지 소스에 노출되는 걸 막기 위함).
 };
 
-/* 역사 정확성 메모 (2026-08-31 핸드오프 문서 기준 · 활동1 재구성):
- * - 사료 1~3(권력욕 축)·4~5(백성 피해 축) 모두 검색 스니펫 기반 대조 완료.
- *   자동 크롤러가 원 사이트(contents.history.go.kr) 접근이 막혀 있어 검색 결과로 대조한
- *   것이므로, 실제 수업 배포 전 브라우저로 원문 링크를 한 번 더 눈으로 확인하는 걸 권장.
- *   - 「사료로 본 한국사 – 강화 천도」: https://contents.history.go.kr/front/hm/view.do?levelId=hm_051_0020
+/* 역사 정확성 메모 (v2 · 실사용 피드백 반영, 2:2 균형 재구성):
+ * - 사료 편향 문제 수정: 기존 3개(전부 '버린 것' 계열) → 4개, 2:2 균형('버린 것' ①③ / '지킨 것' ②④).
+ * - 사료①(기록2)·③(기록5)은 기존 출처 그대로 유지(검색 스니펫 기반 대조, 배포 전 육안 재확인 권장):
  *   - 인물 「최우」: https://contents.history.go.kr/mobile/kc/view.do?levelId=kc_n205300
  *   - 한국민족문화대백과사전 「최우」: https://encykorea.aks.ac.kr/Article/E0057502
  *   - 「사료로 본 한국사 – 몽골의 침입으로 황폐해진 백성의 삶」: https://contents.history.go.kr/front/hm/view.do?levelId=hm_062_0020
- * - 최우가 대장경 재조(팔만대장경)에 사재를 기부했다는 기록도 있어, 인물 전체를 "권력욕만
- *   있는 인물"로 단정하는 표현은 피함 — 이 화면에서도 최우 개인에 대한 단정적 평가 문구
- *   대신 사실(행위) 서술만 제시함.
- * - 정오 판정 없음. 학생 판단은 자유 서술로만 기록.
- * - 사료①·② 즉답 질문 워딩은 임시 초안. 특히 사료②의 "일부/대규모" 선택지가 20만
- *   6,800명이라는 숫자의 시대적 맥락에서 과장·축소로 읽히지 않는지 배포 전 효니 검수 필요.
- * - 기록1(반대 처단하고 강행)은 별도 사료 카드에서 삭제하고, 도입 화면 안내문으로 흡수함.
- * - 기록3(격구장)은 삭제(원래도 참고용 부차 사료였음).
+ * - 사료②·④는 신규 — 프로젝트 파일 `한국사_고려.pdf` 93~94쪽(역사② 교과서, 몽골의 간섭과 고려의 개혁 단원)
+ *   내용을 기준으로 인용. 출처 표기의 정확한 출판사명·쪽수는 임시 표기이며 효니가 원본 교과서 기준으로
+ *   확인 후 정확히 넣어야 함.
+ * - 정오 판정 없음(사료③ 자유 반응). 사료①②④ 즉답 질문은 사료 원문에 명시된 사실 기준의 확인형 질문 —
+ *   유도 질문 아님.
+ * - v1의 활동1 "다시 판단하기" 글쓰기 화면은 삭제함. 종합 판단은 활동2(원종의 협상~삼별초의 항쟁,
+ *   https://hyonnie-t.github.io/Goryeo-Mongol/) 마지막 화면에서 1차시 판단·오늘 사료·시뮬레이션을
+ *   모두 겪은 뒤 한 번만 쓰도록 통합함 — 활동1·2에서 사실상 같은 질문을 두 번 묻던 중복 제거.
+ * - "사료 다시 보기"가 사료③ 하나만 보이던 버그 수정 — ①~④ 전체를 아코디언으로 다시 볼 수 있게 함.
  */
 
 let studentId = "", studentName = "";
 let PREVIEW = false;
-let choice1 = "", choice2 = "", response3 = "";
+let choice1 = "", choice2 = "", response3 = "", choice4 = "";
 
-const SCREENS = ["screen-start","screen-source1","screen-source2","screen-source3","screen-judge","screen-result"];
+const SCREENS = ["screen-start","screen-source1","screen-source2","screen-source3","screen-source4","screen-result"];
+
+/* 사료 다시 보기용 데이터 (①~④). 퀴즈 화면의 사료 카드 내용과 같은 사실을 담되,
+ * 화면 마크업과는 독립적으로 유지 — 결과 화면 아코디언 전용. */
+const REVIEW_SOURCES = [
+  { num:"①", tag:"red", title:"가장 먼저 옮겨진 것",
+    quote:"천도가 결정된 그날, 최우는 관리들의 녹봉(월급)으로 쓸 쌀을 실어 나르던 수레 100여 채를 빼앗아, 자기 집안의 재산을 가장 먼저 강화도로 옮겼어.",
+    cite:"출처: 우리역사넷 인물 「최우」 / 한국민족문화대백과사전 「최우」" },
+  { num:"②", tag:"teal", title:"버틸 수 있었던 이유",
+    quote:"강화도는 농사지을 땅이 넉넉해 식량 걱정이 적었고, 물살이 거세어 해전에 약한 몽골군이 쉽게 접근하지 못하는 곳이었어.",
+    cite:"출처: 역사② 교과서 93쪽" },
+  { num:"③", tag:"red", title:"산성으로 피신한 사람들",
+    quote:"전쟁을 피해 공주(公州) 산성으로 들어간 백성 중에는 굶어 죽는 사람이 많았고, 어떤 이는 함께 데려갈 수 없었던 아이를 나무에 묶어 놓은 채 떠나야 했어.",
+    cite:"출처: 『고려사절요』 권17, 고종 42년 3월" },
+  { num:"④", tag:"teal", title:"40년을 버틴 결과",
+    quote:"이후 고려는 40여 년간 몽골에 맞서 싸웠고, 훗날 태자(원종)는 몽골과 협상해 고려의 독립과 풍속을 유지하는 조건으로 강화를 맺었어.",
+    cite:"출처: 역사② 교과서 93~94쪽" }
+];
 
 function showScreen(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
@@ -366,6 +401,10 @@ function renderStepDots(activeId){
   const host = document.getElementById("stepDots");
   const idx = SCREENS.indexOf(activeId);
   host.innerHTML = SCREENS.map((s,i) => `<span class="step-dot${i<=idx ? " on" : ""}"></span>`).join("");
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
 /* ── 로그인 ── */
@@ -411,52 +450,33 @@ response3Input.addEventListener("input", () => {
   const len = response3Input.value.trim().length;
   response3Count.textContent = `${len}자 (10~20자 권장)`;
   response3Count.className = "response-count" + (len >= 10 && len <= 20 ? " ok" : (len > 20 ? " over" : ""));
-  document.getElementById("toJudgeBtn").disabled = len < 5;
+  document.getElementById("toSource4Btn").disabled = len < 5;
 });
-
-document.getElementById("toJudgeBtn").addEventListener("click", () => {
+document.getElementById("toSource4Btn").addEventListener("click", () => {
   response3 = response3Input.value.trim();
-  document.getElementById("summaryChoice1").textContent = choice1;
-  document.getElementById("summaryChoice2").textContent = choice2;
-  document.getElementById("summaryResponse3").textContent = `"${response3}"`;
-  showScreen("screen-judge");
+  showScreen("screen-source4");
 });
 
-/* ── 판단 글쓰기 화면: 사료 다시 보기 토글 ── */
-document.getElementById("reviewToggle").addEventListener("click", () => {
-  document.getElementById("reviewBox").classList.toggle("open");
-});
+/* ── 사료④ 즉답 질문 (마지막 — 응답 후 자동으로 제출·결과 화면) ── */
+const c4a = document.getElementById("c4-a");
+const c4b = document.getElementById("c4-b");
+function pickChoice4(btn){
+  choice4 = btn.dataset.label;
+  [c4a, c4b].forEach(b => { b.classList.toggle("selected", b === btn); b.disabled = true; });
+  finishActivity();
+}
+c4a.addEventListener("click", () => pickChoice4(c4a));
+c4b.addEventListener("click", () => pickChoice4(c4b));
 
-/* ── 판단 입력 (60~100자) ── */
-const judgeInput = document.getElementById("judgeInput");
-const submitBtn = document.getElementById("submitBtn");
-const charCount = document.getElementById("charCount");
-
-judgeInput.addEventListener("input", () => {
-  const len = judgeInput.value.trim().length;
-  charCount.textContent = `${len}자`;
-  charCount.className = "charcount" + (len >= 60 && len <= 100 ? " ok" : (len > 100 ? " over" : ""));
-  submitBtn.disabled = len < 20;
-});
-
-document.getElementById("hintToggle").addEventListener("click", () => {
-  document.getElementById("hintBox").classList.toggle("open");
-});
-
-/* ── 제출 ── */
-submitBtn.addEventListener("click", async () => {
-  submitBtn.disabled = true;
-  submitBtn.textContent = "제출 중...";
-
-  const reflection = judgeInput.value.trim();
-  const choiceSummary = `${choice1} · ${choice2} · "${response3}"`;
+/* ── 제출 + 결과 화면 구성 (사료④ 응답 즉시 자동 실행) ── */
+async function finishActivity(){
   const payload = {
     gameName: CONFIG.GAME_NAME,
     studentId: studentId,
     studentName: studentName,
-    reflection: reflection,
-    choicesJson: JSON.stringify({ choice1, choice2, response3 }),
-    choiceSummary: choiceSummary,
+    reflection: response3,
+    choicesJson: JSON.stringify({ choice1, choice2, response3, choice4 }),
+    choiceSummary: `${choice1} · ${choice2} · "${response3}" · ${choice4}`,
     diffSummary: ""
   };
 
@@ -473,7 +493,52 @@ submitBtn.addEventListener("click", async () => {
   }
 
   document.getElementById("resultGreeting").textContent = `${studentName}, 수고했어요!`;
+  document.getElementById("summaryChoice1").textContent = choice1;
+  document.getElementById("summaryChoice2").textContent = choice2;
+  document.getElementById("summaryResponse3").textContent = `"${response3}"`;
+  document.getElementById("summaryChoice4").textContent = choice4;
   showScreen("screen-result");
+}
+
+/* ── 사료 다시 보기 아코디언 (①~④ 전체, 기본 접힘) ── */
+function renderReviewAccordion(){
+  const host = document.getElementById("reviewAccordion");
+  host.innerHTML = REVIEW_SOURCES.map((s, i) => `
+    <div class="review-item" data-idx="${i}">
+      <div class="review-item-head">
+        <span class="tag ${s.tag}">사료 ${s.num}</span>
+        <span class="ttl">${escapeHtml(s.title)}</span>
+        <span class="chev">▾</span>
+      </div>
+      <div class="review-item-body">
+        <p class="quote">${escapeHtml(s.quote)}</p>
+        <div class="cite">${escapeHtml(s.cite)}</div>
+      </div>
+    </div>
+  `).join("");
+  host.querySelectorAll(".review-item-head").forEach(head => {
+    head.addEventListener("click", () => {
+      head.closest(".review-item").classList.toggle("open");
+    });
+  });
+}
+document.getElementById("reviewToggle").addEventListener("click", () => {
+  const acc = document.getElementById("reviewAccordion");
+  const willShow = acc.style.display === "none";
+  if (willShow && !acc.dataset.built) {
+    renderReviewAccordion();
+    acc.dataset.built = "1";
+  }
+  acc.style.display = willShow ? "block" : "none";
+});
+
+/* ── 다음 활동(원종의 협상 시뮬레이션)으로 이동 — sid/name(및 preview) 그대로 전달 ── */
+document.getElementById("nextActivityBtn").addEventListener("click", () => {
+  const params = new URLSearchParams();
+  params.set("sid", studentId);
+  params.set("name", studentName);
+  if (PREVIEW) params.set("preview", "1");
+  location.href = CONFIG.NEXT_ACTIVITY_URL + "?" + params.toString();
 });
 
 /* ── URL 파라미터 자동 채움 / 미리보기 모드 ──
